@@ -42,3 +42,11 @@ export function delCheckitem(id) {
     method: 'delete'
   })
 }
+
+// 查询所有检查项
+export function getAllCheckitems() {
+  return request({
+    url: '/reservation/checkitem/all',
+    method: 'get'
+  })
+}
