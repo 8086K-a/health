@@ -2,60 +2,51 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.health.reservation.mapper.TCheckitemMapper">
+<mapper namespace="com.health.system.mapper.TCheckgroupMapper">
     
-    <resultMap type="TCheckitem" id="TCheckitemResult">
+    <resultMap type="TCheckgroup" id="TCheckgroupResult">
         <result property="id"    column="id"    />
         <result property="code"    column="code"    />
         <result property="name"    column="name"    />
+        <result property="helpCode"    column="help_code"    />
         <result property="sex"    column="sex"    />
-        <result property="age"    column="age"    />
-        <result property="price"    column="price"    />
-        <result property="type"    column="type"    />
-        <result property="attention"    column="attention"    />
         <result property="remark"    column="remark"    />
+        <result property="attention"    column="attention"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectTCheckitemVo">
-        select id, code, name, sex, age, price, type, attention, remark, create_by, create_time, update_by, update_time from t_checkitem
+    <sql id="selectTCheckgroupVo">
+        select id, code, name, help_code, sex, remark, attention, create_by, create_time, update_by, update_time from t_checkgroup
     </sql>
 
-    <select id="selectTCheckitemList" parameterType="TCheckitem" resultMap="TCheckitemResult">
-        <include refid="selectTCheckitemVo"/>
+    <select id="selectTCheckgroupList" parameterType="TCheckgroup" resultMap="TCheckgroupResult">
+        <include refid="selectTCheckgroupVo"/>
         <where>  
-            <if test="searchValue != null and searchValue != ''">
-                and (code like concat('%', #{searchValue}, '%') or name like concat('%', #{searchValue}, '%'))
-            </if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="helpCode != null  and helpCode != ''"> and help_code = #{helpCode}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
-            <if test="age != null  and age != ''"> and age = #{age}</if>
-            <if test="price != null "> and price = #{price}</if>
-            <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="attention != null  and attention != ''"> and attention = #{attention}</if>
         </where>
     </select>
     
-    <select id="selectTCheckitemById" parameterType="Long" resultMap="TCheckitemResult">
-        <include refid="selectTCheckitemVo"/>
+    <select id="selectTCheckgroupById" parameterType="Long" resultMap="TCheckgroupResult">
+        <include refid="selectTCheckgroupVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertTCheckitem" parameterType="TCheckitem" useGeneratedKeys="true" keyProperty="id">
-        insert into t_checkitem
+    <insert id="insertTCheckgroup" parameterType="TCheckgroup" useGeneratedKeys="true" keyProperty="id">
+        insert into t_checkgroup
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null">code,</if>
             <if test="name != null">name,</if>
+            <if test="helpCode != null">help_code,</if>
             <if test="sex != null">sex,</if>
-            <if test="age != null">age,</if>
-            <if test="price != null">price,</if>
-            <if test="type != null">type,</if>
-            <if test="attention != null">attention,</if>
             <if test="remark != null">remark,</if>
+            <if test="attention != null">attention,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -64,12 +55,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="code != null">#{code},</if>
             <if test="name != null">#{name},</if>
+            <if test="helpCode != null">#{helpCode},</if>
             <if test="sex != null">#{sex},</if>
-            <if test="age != null">#{age},</if>
-            <if test="price != null">#{price},</if>
-            <if test="type != null">#{type},</if>
-            <if test="attention != null">#{attention},</if>
             <if test="remark != null">#{remark},</if>
+            <if test="attention != null">#{attention},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -77,17 +66,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateTCheckitem" parameterType="TCheckitem">
-        update t_checkitem
+    <update id="updateTCheckgroup" parameterType="TCheckgroup">
+        update t_checkgroup
         <trim prefix="SET" suffixOverrides=",">
             <if test="code != null">code = #{code},</if>
             <if test="name != null">name = #{name},</if>
+            <if test="helpCode != null">help_code = #{helpCode},</if>
             <if test="sex != null">sex = #{sex},</if>
-            <if test="age != null">age = #{age},</if>
-            <if test="price != null">price = #{price},</if>
-            <if test="type != null">type = #{type},</if>
-            <if test="attention != null">attention = #{attention},</if>
             <if test="remark != null">remark = #{remark},</if>
+            <if test="attention != null">attention = #{attention},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
@@ -96,12 +83,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteTCheckitemById" parameterType="Long">
-        delete from t_checkitem where id = #{id}
+    <delete id="deleteTCheckgroupById" parameterType="Long">
+        delete from t_checkgroup where id = #{id}
     </delete>
 
-    <delete id="deleteTCheckitemByIds" parameterType="String">
-        delete from t_checkitem where id in 
+    <delete id="deleteTCheckgroupByIds" parameterType="String">
+        delete from t_checkgroup where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.reservation.mapper.TSetmealCheckgroupMapper">
+
+    <insert id="insertCheckgroupIds">
+        insert into t_setmeal_checkgroup (setmeal_id, checkgroup_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{setmealId},#{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteTSetmealCheckgroupBySetmealId" parameterType="Long">
+        delete from t_setmeal_checkgroup where setmeal_id = #{setmealId}
+    </delete>
+
+</mapper>

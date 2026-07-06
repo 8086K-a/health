@@ -60,6 +60,16 @@ public class TCheckitemController extends BaseController
     }
 
     /**
+     * 查询所有检查项
+     */
+    @PreAuthorize("@ss.hasPermi('reservation:checkitem:list')")
+    @GetMapping("/all")
+    public AjaxResult all()
+    {
+        return success(tCheckitemService.selectTCheckitemList(null));
+    }
+
+    /**
      * 获取检查项详细信息
      */
     @PreAuthorize("@ss.hasPermi('reservation:checkitem:query')")

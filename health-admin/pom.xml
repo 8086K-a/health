@@ -60,6 +60,12 @@
             <artifactId>health-reservation</artifactId>
         </dependency>
 
+        <!-- OSS云存储-->
+        <dependency>
+            <groupId>com.health</groupId>
+            <artifactId>health-oss</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

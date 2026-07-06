@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.reservation.mapper.TCheckgroupCheckitemMapper">
+
+    <insert id="insertCheckitemIds">
+        insert into t_checkgroup_checkitem (checkgroup_id, checkitem_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{groupId},#{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteTCheckgroupCheckitemByCheckgroupId" parameterType="Long">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId}
+    </delete>
+
+</mapper>
