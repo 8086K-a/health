@@ -22,6 +22,12 @@ import com.health.reservation.service.ITSetmealService;
 import com.health.common.utils.poi.ExcelUtil;
 import com.health.common.core.page.TableDataInfo;
 
+/**
+ * 套餐Controller
+ * 
+ * @author ruoyi
+ * @date 2026-07-07
+ */
 @RestController
 @RequestMapping("/reservation/setmeal")
 public class TSetmealController extends BaseController
@@ -29,6 +35,9 @@ public class TSetmealController extends BaseController
     @Autowired
     private ITSetmealService tSetmealService;
 
+    /**
+     * 查询套餐列表
+     */
     @PreAuthorize("@ss.hasPermi('reservation:setmeal:list')")
     @GetMapping("/list")
     public TableDataInfo list(TSetmeal tSetmeal)
@@ -38,6 +47,9 @@ public class TSetmealController extends BaseController
         return getDataTable(list);
     }
 
+    /**
+     * 导出套餐列表
+     */
     @PreAuthorize("@ss.hasPermi('reservation:setmeal:export')")
     @Log(title = "套餐", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -48,6 +60,9 @@ public class TSetmealController extends BaseController
         util.exportExcel(response, list, "套餐数据");
     }
 
+    /**
+     * 获取套餐详细信息
+     */
     @PreAuthorize("@ss.hasPermi('reservation:setmeal:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
@@ -71,11 +86,14 @@ public class TSetmealController extends BaseController
         return toAjax(tSetmealService.updateTSetmeal(dto));
     }
 
+    /**
+     * 删除套餐
+     */
     @PreAuthorize("@ss.hasPermi('reservation:setmeal:remove')")
     @Log(title = "套餐", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{id}")
-    public AjaxResult remove(@PathVariable Long id)
+	@DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(tSetmealService.deleteTSetmealById(id));
+        return toAjax(tSetmealService.deleteTSetmealByIds(ids));
     }
 }

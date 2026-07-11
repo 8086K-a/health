@@ -135,6 +135,19 @@ aliyun:
     accessKeyId: YOUR_ACCESS_KEY_ID
     accessKeySecret: YOUR_ACCESS_KEY_SECRET
 
+# AI 模型配置
+ai:
+  model:
+    # dashscope | openai | deepseek
+    provider: dashscope
+    api-key: sk-ws-H.EMYHPRY.9Pxy.MEUCIQDEotop8ZknEIH45n0NyZj6vk99snYemHkhphJSdlV7iQIgeXW_A5FFM-TX750I_MC85nQPzBUDhgUXI79I2mBNoDk
+    model-name: deepseek-v4-flash
+
+    max-tokens: 2048
+    temperature: 0.7
+    max-history-messages: 20
+    system-prompt: "你是一个专业、友好的 AI 助手，请用中文回答问题。"
+
 # 防盗链配置
 referer:
   # 防盗链开关

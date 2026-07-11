@@ -14,7 +14,7 @@ import com.health.reservation.vo.TSetmealVo;
 import com.health.reservation.service.ITSetmealService;
 
 @Service
-public class TSetmealServiceImpl implements ITSetmealService
+public class TSetmealServiceImpl implements ITSetmealService 
 {
     @Autowired
     private TSetmealMapper tSetmealMapper;
@@ -56,32 +56,31 @@ public class TSetmealServiceImpl implements ITSetmealService
     @Override
     public int updateTSetmeal(TSetmealDto dto)
     {
-        try
+        if (dto.getCheckgroupIds() != null && dto.getCheckgroupIds().size() > 0)
         {
-            if (dto.getCheckgroupIds() != null && dto.getCheckgroupIds().size() > 0)
-            {
-                tSetmealCheckgroupMapper.deleteTSetmealCheckgroupBySetmealId(dto.getId());
-                tSetmealCheckgroupMapper.insertCheckgroupIds(dto.getCheckgroupIds(), dto.getId());
-            }
-            dto.setUpdateTime(DateUtils.getNowDate());
-            return tSetmealMapper.updateTSetmeal(dto);
+            tSetmealCheckgroupMapper.deleteTSetmealCheckgroupBySetmealId(dto.getId());
+            tSetmealCheckgroupMapper.insertCheckgroupIds(dto.getCheckgroupIds(), dto.getId());
         }
-        catch (Exception e)
-        {
-            throw new RuntimeException("修改套餐信息失败");
-        }
+        dto.setUpdateTime(DateUtils.getNowDate());
+        return tSetmealMapper.updateTSetmeal(dto);
     }
 
+    @Transactional
+    @Override
+    public int deleteTSetmealByIds(Long[] ids)
+    {
+        for (Long id : ids)
+        {
+            tSetmealCheckgroupMapper.deleteTSetmealCheckgroupBySetmealId(id);
+        }
+        return tSetmealMapper.deleteTSetmealByIds(ids);
+    }
+
+    @Transactional
     @Override
     public int deleteTSetmealById(Long id)
     {
         tSetmealCheckgroupMapper.deleteTSetmealCheckgroupBySetmealId(id);
         return tSetmealMapper.deleteTSetmealById(id);
-    }
-
-    @Override
-    public int deleteTSetmealByIds(Long[] ids)
-    {
-        return tSetmealMapper.deleteTSetmealByIds(ids);
     }
 }

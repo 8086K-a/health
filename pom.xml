@@ -185,6 +185,13 @@
                 <version>${health.version}</version>
             </dependency>
 
+            <!-- AI对话模块 -->
+            <dependency>
+                <groupId>com.health</groupId>
+                <artifactId>health-ai</artifactId>
+                <version>${health.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
@@ -203,6 +210,7 @@
         <module>health-reservation</module>
         <module>health-common</module>
         <module>health-oss</module>
+        <module>health-ai</module>
     </modules>
     <packaging>pom</packaging>
 

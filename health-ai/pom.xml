@@ -9,19 +9,28 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>health-reservation</artifactId>
+    <artifactId>health-ai</artifactId>
 
-    <description>
-        预约管理模块
-    </description>
+    <description>AI 大模型对话模块</description>
 
     <dependencies>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j</artifactId>
+            <version>0.36.2</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-open-ai</artifactId>
+            <version>0.36.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.health</groupId>
             <artifactId>health-common</artifactId>
         </dependency>
     </dependencies>
-
-
-
 </project>

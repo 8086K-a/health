@@ -66,6 +66,12 @@
             <artifactId>health-oss</artifactId>
         </dependency>
 
+        <!-- AI对话模块 -->
+        <dependency>
+            <groupId>com.health</groupId>
+            <artifactId>health-ai</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

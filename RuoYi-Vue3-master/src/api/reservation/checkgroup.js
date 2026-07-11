@@ -42,3 +42,11 @@ export function delCheckgroup(id) {
     method: 'delete'
   })
 }
+
+// 查询所有检查组
+export function getAllCheckgroups() {
+  return request({
+    url: '/reservation/checkgroup/all',
+    method: 'get'
+  })
+}
